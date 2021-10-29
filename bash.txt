@@ -1,0 +1,3 @@
+'''
+cat filename.txt | cut -d "|" -f 1 >> outfilename.txt
+'''
