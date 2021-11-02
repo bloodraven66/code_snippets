@@ -20,10 +20,27 @@ def train_loop(train_loader, val_loader, model, optimizer, loss_fn, device):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
+        
+'''
+save torch model
+'''
+
+def saveCheckpoint(model, path):
+    torch.save(model.state_dict(), path)
+        
+'''
+load torch model
+'''
+
+def load_pretrained(path, model, device='cuda:1'):
+    model.load_state_dict(torch.load(path,  map_location=device))
+    return model
+
 
 '''
 wandb logger
 '''
+
 class WandbLogger():
     def __init__(self, config):
         self.run = wandb.init(reinit=True,
