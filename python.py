@@ -15,3 +15,14 @@ def read_yaml(yamlFile):
         config = yaml.load(f, Loader=yaml.SafeLoader)
         cfg = AttrDict(config)
     return cfg
+
+'''
+save torch model
+'''
+
+'''
+load torch model
+'''
+def load_pretrained(path, model, device='cuda:1'):
+    model.load_state_dict(torch.load(path,  map_location=device))
+    return model
