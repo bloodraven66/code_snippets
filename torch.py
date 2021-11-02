@@ -22,6 +22,18 @@ def train_loop(train_loader, val_loader, model, optimizer, loss_fn, device):
         optimizer.step()
         
 '''
+model chassis
+'''
+
+class ModelName(nn.Module):
+    def __init__(self, args):
+        super().__init__()
+        self.args = args
+        
+    def forward(self, x):
+        return x
+
+'''
 save torch model
 '''
 
