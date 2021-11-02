@@ -48,6 +48,22 @@ def load_pretrained(path, model, device='cuda:1'):
     model.load_state_dict(torch.load(path,  map_location=device))
     return model
 
+'''
+confusion matrix pytorch
+'''
+num_classes = 9
+confusion_matrix = torch.zeros(num_classes, num_classes)
+
+with torch.no_grad():
+    for i, (inputs, classes) in enumerate(dataloaders['val']):
+        inputs = inputs.to(device)
+        classes = classes.to(device)
+        outputs = model_ft(inputs)
+        _, preds = torch.max(outputs, 1)
+        for t, p in zip(classes.view(-1), preds.view(-1)):
+                confusion_matrix[t.long(), p.long()] += 1
+
+print(confusion_matrix)
 
 '''
 wandb logger
