@@ -19,7 +19,9 @@ def read_yaml(yamlFile):
 '''
 save torch model
 '''
-
+def saveCheckpoint(model, path):
+    torch.save(model.state_dict(), path)
+        
 '''
 load torch model
 '''
