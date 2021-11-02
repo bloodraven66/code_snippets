@@ -16,15 +16,4 @@ def read_yaml(yamlFile):
         cfg = AttrDict(config)
     return cfg
 
-'''
-save torch model
-'''
-def saveCheckpoint(model, path):
-    torch.save(model.state_dict(), path)
-        
-'''
-load torch model
-'''
-def load_pretrained(path, model, device='cuda:1'):
-    model.load_state_dict(torch.load(path,  map_location=device))
-    return model
+
