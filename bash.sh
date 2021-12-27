@@ -34,7 +34,10 @@ wait
 
 #sum of all lines in file
 
-cat filename | cut --d ',' -f1 | paste -sd+ | bc
+cat filename | cut --d ',' -f2 | paste -sd+ | bc
+
+#conditional sum with awk
+cat filename | awk -F, '{if ($2<60 &&  $2>50) print $2}' | paste -sd+ | bc
 
 #fasttext classifier
 
