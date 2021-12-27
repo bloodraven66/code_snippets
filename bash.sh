@@ -2,6 +2,23 @@
 
 cat filename.txt | cut -d "|" -f 1 >> outfilename.txt
 
+#bash parallel run while iterating through files in folder
+
+NR_CPUS=40
+job_count=0
+for filename in $1/*
+do
+  {
+  commands
+  ...
+  } &
+  job_count=$((job_count+1))
+  if [ "$job_count" -eq $NR_CPUS ]; then
+        wait
+        job_count=0
+  fi
+done
+wait
 
 #fasttext classifier
 
