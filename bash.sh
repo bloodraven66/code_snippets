@@ -20,6 +20,22 @@ do
 done
 wait
 
+#Example: get smaple rate and duration of all files in a folder, command=
+  {
+    dur=("`ffmpeg -i $filename 2>&1 | grep Duration | cut -d ' ' -f 4 | sed s/,// | awk -F: '{ print ($1 * 3600) + ($2 * 60) + $3 }'`  ")
+  	sr=$(sox --i -r $filename)
+    if [ $? -eq 0 ]; then
+      echo ${filename##*/}, $dur, $sr >> ${1##*/}.txt
+    else
+      echo skipped  ${filename##*/}
+    fi
+
+  } &
+
+#sum of all lines in file
+
+cat filename | cut --d ',' -f1 | paste -sd+ | bc
+
 #fasttext classifier
 
 ./fasttext supervised -input . -output mr_4class -epoch 50 -wordNgrams 2
